@@ -1,0 +1,247 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link href="{% static 'css/viewer_main.css' %}" type="text/css" rel="stylesheet" />
+
+    <title>streamer</title>
+    <style>
+          #load {
+    width: 50px;
+    height: 50px;
+    /* 상하좌우 정중앙 정렬하기 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px; /* 자식 요소 전체를 중앙 정렬하기 위해, 상단 및 왼쪽 margin을 마이너스 값으로 적용하기 */
+  }
+
+  .menulist {
+    padding: 2vh;
+  }
+
+  #load {
+    width: 50px;
+    height: 50px;
+    /* 상하좌우 정중앙 정렬하기 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px; /* 자식 요소 전체를 중앙 정렬하기 위해, 상단 및 왼쪽 margin을 마이너스 값으로 적용하기 */
+  }
+  .media-box{
+    margin: 25px;
+    border: 1px solid black;
+    background-color: white;
+  }
+  #video {
+    width: 100%;
+    height: 100%;
+  }
+  #media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #streamerform{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:30px;
+    margin-bottom:60px;
+  }
+  .live-list-image-box{
+    background-color: white;
+  }
+    #load {
+    left: 50%;
+    top:40%;
+    position: absolute;
+    margin-left: -100px;
+    margin-top: -100px;
+    display: block;
+  }
+  #image-box{
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+    </style>
+</head>
+<body>
+{% load static %}
+<div id="load">
+    <img id="image-box" src="{% static 'mediafiles/loading.gif' %}" alt="loading">
+</div>
+<header>
+    <div class="line1 aaa"><p>방송 시청</p></div>
+  </header>
+  <div>
+    <button type="button" class="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="line2 aaa">
+    <input
+      type="image"
+      id="home"
+      src="{% static 'mediafiles/return.png' %}"
+      onclick="location.href='/'"
+      width="30px"
+      height="30px"
+    />
+  </div>
+  <div class="menuwrap">
+    <nav id="menu">
+      <ul class="category_list">
+        <li class="profile">
+          <div class="card-container">
+            <div class="upper-container">
+              <div class="image-container">
+                <label for="profile">
+                  <img id="pic" src="{{ user.user_img.url }}" style="width: 100%" />
+                </label>
+                <input
+                  type="file"
+                  id="profile"
+                  class="iconnone"
+                  accept="image/*"
+                  onchange="setThumbnail"
+                />
+              </div>
+            </div>
+            <div class="lower-container">
+              <div>
+                <p>{{ user.user_nickname }} 님 환영합니다.</p>
+              </div>
+              <br />
+              <div>
+                <a href="/mypage" class="btn">Mypage</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="menulist">
+          <a class="link_sub_item" href="/">시청자 ↔ 스트리머</a>
+        </li>
+        <li class="bottom">
+          <button id="logout" onclick="logout()">로그아웃</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+<div class="content">
+    <br>
+    <div id="posts">
+          <div class="live-list" >
+            <div class="live-list-image-box">
+                <div id="media" style="background-color: white;">
+                    
+                    <audio id="audio" autoplay="true"></audio>
+                    <video id="video" autoplay="true" playsinline="true"></video>
+                </div>
+            </div>
+            <div class="stream-info">
+                <div style="display: flex; flex-direction: row-reverse; padding-right:40px;">
+                  <p style="font-size: smaller;">{{ category }}</p>
+                  <h2 style="text-align: right; margin-right:20px;"> <i class="fas fa-user-alt"></i> {{ head_count|add:1 }}</h2>
+                </div>
+                <h2>{{ host_id }}</h2>
+                <p style="color:black; font-weight: 600;">{{ title }}</p>
+            </div>
+          </div>
+    </div>
+    <input id="streamid" type="hidden" value="{{ host_id }}"/>
+</div>
+<script>
+    window.onload = function() {
+        start();
+    };
+
+    window.addEventListener('beforeunload', function (e) {
+        stop();
+    });
+
+    function logout() {
+        location.href = '/logout';
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        document
+          .querySelector('.mobile-menu')
+          .addEventListener('click', function (e) {
+            if (document.querySelector('.menuwrap').classList.contains('on')) {
+              //메뉴닫힘
+              document.querySelector('.menuwrap').classList.remove('on');
+              document
+                .querySelector('.mobile-menu i')
+                .classList.remove('fa-times');
+              document.querySelector('.mobile-menu i').classList.add('fa-bars');
+
+              //페이지 스크롤 락 해제
+              document.querySelector('#dimmed').remove();
+            } else {
+              //메뉴펼침
+              document.querySelector('.menuwrap').classList.add('on');
+              document
+                .querySelector('.mobile-menu i')
+                .classList.remove('fa-bars');
+              document
+                .querySelector('.mobile-menu i')
+                .classList.add('fa-times');
+
+              //페이지 스크롤 락 레이어 추가
+              let div = document.createElement('div');
+              div.id = 'dimmed';
+              document.body.append(div);
+
+              //페이지 스크롤 락  모바일 이벤트 차단
+              document
+                .querySelector('#dimmed')
+                .addEventListener(
+                  'scroll touchmove touchend mousewheel',
+                  function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                  }
+                );
+
+              //페이지 스크롤 락 레이어 클릭 메뉴 닫기
+              document
+                .querySelector('#dimmed')
+                .addEventListener('click', function (e) {
+                  document.querySelector('.mobile-menu').click();
+                });
+            }
+          });
+      });
+      function setThumbnail(event) {
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          var img = document.createElement('img');
+          img.setAttribute('src', event.target.result);
+          document.querySelector('div#image_container').appendChild(img);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      }
+
+</script>
+<script src="{% static 'js/broadcast.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Setting</title>
+    <style>
+        .content{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content" id="streamer-menu">
+        <a href="/">메인으로</a>
+        <h4>방송설정</h4>
+        <br>방송제목
+        <input type="text" id="title">
+        <br>카테고리
+        <select id="category">
+            <option value="야외방송" selected>야외방송</option>
+            <option value="게임방송">게임방송</option>
+        </select>
+        <br>비디오 변환
+        <select id="video-transform">
+            <option value="none" selected>No transform</option>
+            <option value="Mosaic">Mosaic</option>
+        </select>
+        <br>사용할 모델
+        <select id="video-model">
+            <option value="noModel" selected>모델 사용안함</option>
+            {% for md in model %}
+                <option value="{{ md.model_name }}">{{ md.model_name }}</option>
+            {% endfor %}
+        </select>
+        <br>프레임 설정(5 이상일시 프레임 밀림)
+        <select id="frame">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="60">60</option>
+        </select>
+        <br>
+        <input type="hidden" id="streamid" value="{{request.session.user_id}}">
+        <button id="start" onclick="start()">방송시작</button>
+        <button id="stop" style="display: none" onclick="stop()">방송종료</button>
+    </div>
+
+    <div class="content2">
+        <div id="load" style="display: none;">
+            <img src="{% static 'mediafiles/loading.gif' %}" alt="loading">
+        </div>
+        <div class="media-box">
+            <div id="media">
+
+                <audio id="audio" autoplay="true"></audio>
+                <video id="video" autoplay="true" playsinline="true"></video>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    
+</script>
+<script src="//code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="{% static 'js/onair2.js' %}"></script>
+</html>

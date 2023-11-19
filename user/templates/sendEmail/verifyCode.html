@@ -1,0 +1,22 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h4>회원가입을 위해 입력하신 이메일로 인증코드를 보냈습니다.</h4>
+        <h3>이메일로 전송된 메일의 인증코드를 입력해주세요.</h3><br>
+        <form action="verify/submit" method="POST">{% csrf_token %}
+            <span>인증코드</span>
+            <input name='verifyCode' type="text" placeholder="인증코드를 적어주세요.">
+            <input type="submit" value="인증하기">
+        </form>
+    </div>
+</body>
+</html>

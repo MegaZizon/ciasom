@@ -1,0 +1,202 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Ciasom</title>
+    <style>
+        .container{
+            
+            text-align: center;
+        }
+        .product-image-box{
+            display: block;
+            width: 180px;
+            height: 220px;
+            object-fit: cover;
+            overflow: hidden;
+            position: relative; /* 추가한 스타일 */
+            flex-shrink: 0;
+        }
+
+        .product-image{
+            display: block;
+            width: 180px;
+            height: 180px;
+        }
+        .image-list{
+            width: 600px;
+            height: 300px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+            overflow: hidden;
+            list-style-type: none;
+            justify-content: center;
+        }
+        .content{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+        }
+        .side{
+            position: absolute;
+            top:50;
+            left:50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="page-header">
+                <h1>Ciasom </h1>
+            </div>
+        </div>
+        <a href="/">메인으로</a><br>
+        아이디:{{ user.user_id }}<br>
+            
+        닉네임:{{ user.user_nickname }}<br>
+        
+        이메일:{{ user.user_email }}<br>
+        <div class="content">
+            <h3>등록된 이미지</h3>
+            <br>
+            <div class="image-list">
+            {% for post in page_obj %}
+            
+                <div class="product-image-box">
+                    <img class="product-image" src="{{ post.user_img.url }}" alt="이미지 설명">
+                    <div style="cursor: pointer;" onclick="location.href='/register/delete/{{ post.id }}'">
+                        삭제하기
+                    </div>
+                </div>
+                
+            {% endfor %}
+            </div>
+            <div>
+                {% if page_obj.has_other_pages %}
+                    <ul style="display:flex;list-style: none;"> 
+            
+                    {% if page_obj.has_previous %}
+                    <li style="margin:3px;"><a style="text-decoration:none; color: blue;" href="?page={{page_obj.previous_page_number}}">&#10094; Prev</a></li>
+                    {% endif %}
+            
+                    {% for page in paginator.page_range %}
+                    {% if page == page_obj.number %}
+                        <li style="margin:3px;"><a style="text-decoration:none; color: red;" href="?page={{page}}">{{page}}</a></li>
+                    {% else %}
+                        <li style="margin:3px;"><a style="text-decoration:none; color: blue;" href="?page={{page}}">{{page}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+            
+                    {% if page_obj.has_next %}
+                    <li style="margin:3px;"><a style="text-decoration:none; color: blue;" href="?page={{page_obj.next_page_number}}">&#10095; Next</a></li>
+                    {% endif %}
+            
+                    </ul>
+                {% endif%}
+            </div>
+        </div>
+
+        <div class="content">
+            <h3>등록된 모델</h3>
+            <br>
+            <div class="image-list">
+            {% for post in model %}
+            
+                <ul id="modelul" class="product-image-box">
+                    <li>
+                    <h4>모델파일명:{{ post.model_name }}</h4>
+                    <div style="cursor: pointer;" onclick="location.href='/register/delete/model/{{ post.id }}'">
+                        삭제하기
+                    </div>
+                    </li>
+                </ul>
+                
+            {% endfor %}
+            </div>
+            
+        </div>
+        
+        <div class="side">
+            <input type="button" onclick="openPopup4()" value="이미지 등록">
+            <div id="popup4" class="popup-container" style="display:none;">
+                <div class="popup">
+                    <span class="close-btn" onclick="closePopup4()">&times;</span>
+                    <h2>사진 변경</h2>
+                    <form action="registImg" method="POST" enctype="multipart/form-data">
+                        <input id ="userImg" name="userImg" type="file">
+                        <input type="submit" value="사진등록">
+                    </form>
+                </div>
+                
+                
+            </div>
+            <input type="button" onclick="openPopup1()" value="모델 생성">
+            <div id="popup1" class="popup-container" style="display:none;">
+                <div class="popup">
+                    <span class="close-btn" onclick="closePopup1()">&times;</span>
+                    <h2>위 이미지로 사용자를 인식하는 모델을 생성합니다.</h2>
+                    <input id ="modelName" name="userImg" type="text" placeholder="모델이름을 입력해주세요.">
+                    <input type="button" onclick="deeplearn()" value="모델학습시키기">
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</body>
+<script>
+    var user_id = "{{ user.user_id }}";
+    var model = "{{ noImg }}";
+    function openPopup4() {
+        document.getElementById('popup4').style.display = 'block';
+    }
+
+    function closePopup4() {
+        document.getElementById('popup4').style.display = 'none';
+    } 
+    function openPopup1() {
+        if(model=='noImg'){
+            alert("사진을 등록하지 않았으므로 모델을 생성할 수 없습니다.")
+        }else{
+            document.getElementById('popup1').style.display = 'block';
+        }
+    }
+
+    function closePopup1() {
+        document.getElementById('popup1').style.display = 'none';
+    } 
+    function deeplearn() {
+        var inputData=document.getElementById('modelName').value
+        console.log(inputData)
+        var href = "/deeplearn/" + user_id;
+        $.ajax({
+            type: 'POST',
+            url:href,       
+            data: {'data': inputData},           
+            success:function(res){
+                if(res.error){
+                    alert(res.error);
+                }else{
+                    location.reload(true);
+                }
+
+            }
+        });  
+    } 
+    
+    var content = "{{ error }}";
+    if(content){
+        if(content!="None")
+            alert(content)
+    }
+    
+</script>
+
+<script src="//code.jquery.com/jquery-3.6.1.min.js"></script>
+</html>

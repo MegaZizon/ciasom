@@ -1,0 +1,134 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Ciasom</title>
+    <style>
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="page-header">
+                <h1>Ciasom </h1>
+            </div>
+        </div>
+        <div class="content">
+            <a href="/">메인으로</a><br>
+                
+                
+            아이디:{{ user.user_id }}<br>
+            
+            닉네임:{{ user.user_nickname }}<br>
+            
+            이메일:{{ user.user_email }}<br>
+            
+            프로필사진:<img class="user-image" src="{{ user.user_img.url }}" alt="">
+            <br>
+            <input type="button" onclick="openPopup1()" value="이메일 변경">
+            <input type="button" onclick="openPopup2()" value="닉네임 변경">
+            <input type="button" onclick="openPopup3()" value="비밀번호 변경">
+            <input type="button" onclick="openPopup4()" value="사진 변경">
+            <input type="button" onclick="openPopup5()" value="회원 탈퇴">
+        </div>
+
+        <div id="popup1" class="popup-container" style="display:none;">
+            <div class="popup">
+                <span class="close-btn" onclick="closePopup1()">&times;</span>
+                <h2>이메일변경</h2>
+                <form action="changeInfo" method="POST">
+                    <input id ="changeEmail" name="changeEmail" type="text" placeholder="이메일변경">
+                    <input type="submit" value="이메일변경">
+                </form>
+            </div>
+        </div>
+        <div id="popup2" class="popup-container" style="display:none;">
+            <div class="popup">
+                <span class="close-btn" onclick="closePopup2()">&times;</span>
+                <h2>닉네임변경</h2>
+                <form action="changeInfo" method="POST">
+                    <input id ="changeNickname" name="changeNickname" type="text" placeholder="닉네임변경">
+                    <input type="submit" value="이메일변경">
+                </form>
+            </div>
+        </div>
+        <div id="popup3" class="popup-container" style="display:none;">
+            <div class="popup">
+                <span class="close-btn" onclick="closePopup3()">&times;</span>
+                <h2>비밀번호 변경</h2>
+                <form action="changeInfo" method="POST">
+                    <input id ="changePW" name="changePW" type="text" placeholder="비밀번호변경">
+                    <input type="submit" value="비밀번호변경">
+                </form>
+            </div>
+        </div>
+        <div id="popup4" class="popup-container" style="display:none;">
+            <div class="popup">
+                <span class="close-btn" onclick="closePopup4()">&times;</span>
+                <h2>사진 변경</h2>
+                <form action="changeInfo" method="POST" enctype="multipart/form-data">
+                    <input id ="changeImg" name="changeImg" type="file">
+                    <input type="submit" value="사진변경">
+                </form>
+            </div>
+        </div>
+        <div id="popup5" class="popup-container" style="display:none;">
+            <div class="popup">
+                <span class="close-btn" onclick="closePopup5()">&times;</span>
+                <h2>회원탈퇴</h2>
+                <form action="changeInfo" method="POST" enctype="multipart/form-data">
+                    <input id ="out" name="out" type="hidden" placeholder="회원탈퇴" value="회원탈퇴">
+                    <input type="submit" value="회원탈퇴 하기">
+                </form>
+            </div>
+        </div>
+        
+        
+    </div>
+</body>
+<script>
+    function openPopup1() {
+        document.getElementById('popup1').style.display = 'block';
+    }
+
+    function closePopup1() {
+        document.getElementById('popup1').style.display = 'none';
+    }
+    function openPopup2() {
+        document.getElementById('popup2').style.display = 'block';
+    }
+
+    function closePopup2() {
+        document.getElementById('popup2').style.display = 'none';
+    }
+    function openPopup3() {
+        document.getElementById('popup3').style.display = 'block';
+    }
+
+    function closePopup3() {
+        document.getElementById('popup3').style.display = 'none';
+    }
+    function openPopup4() {
+        document.getElementById('popup4').style.display = 'block';
+    }
+
+    function closePopup4() {
+        document.getElementById('popup4').style.display = 'none';
+    } 
+    function openPopup5() {
+        document.getElementById('popup5').style.display = 'block';
+    }
+
+    function closePopup5() {
+        document.getElementById('popup5').style.display = 'none';
+    }
+    var content = "{{ error }}";
+    if(content){
+        if(content!="None")
+            alert(content)
+    }
+</script>
+</html>

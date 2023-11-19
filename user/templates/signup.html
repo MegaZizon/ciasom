@@ -1,0 +1,88 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .container{
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="page-header">
+                <h1>Ciasom 회원가입</h1>
+            </div>
+        </div>
+        <form action="signup/submit" method="POST" id="signup-form" enctype="multipart/form-data">{% csrf_token %}
+            <input id ="signupId" name="signupId" type="text" placeholder="아이디">
+            <br>
+            <input id ="signupNickname" name="signupNickname" type="text" placeholder="닉네임">
+            <br>
+            <input id ="signupEmail" name="signupEmail" type="text" placeholder="이메일">
+            <br>
+            <input id ="signupPW" name="signupPW" type="password" placeholder="비밀번호">
+            <br>
+            <input id ="signupPWcheck" name="signupPWcheck" type="password"  placeholder="비밀번호 확인" >
+            <br>
+            프로필사진 (필수아님)<input id="signupImg" name="signupImg" type="file">
+            <br><br><br><br><br><br><br><br>
+            <input type="button" onclick="submit_click();" value="이메일로 회원가입">
+        </form>
+    
+        <input type="button" onclick="dev_click();" value="회원가입(이메일 미인증)">
+    </div>
+          
+</body>
+<script>
+
+    var content = "{{ error }}";
+    if(content){
+        if(content!="None")
+            alert(content)
+    }
+
+    function submit_click(){
+        var pw = document.getElementById('signupPW').value
+        var pwcheck = document.getElementById('signupPWcheck').value
+        if(pw == pwcheck){
+            document.getElementById('signup-form').submit();
+        }else{
+            alert("비밀번호가 일치하지 않습니다.")
+            document.getElementById('signupPWcheck').focus()
+        }
+    }
+
+    function dev_click(){
+        var devForm = document.createElement('form');
+        var id=document.getElementById('signupId');
+        var pw=document.getElementById('signupPW');
+        var email=document.getElementById('signupEmail');
+        var nickname=document.getElementById('signupNickname');
+        var signupImg=document.getElementById('signupImg');
+        var input1 = document.createElement('input');
+        input1.setAttribute("type", "hidden");
+        input1.setAttribute("name", "noEmail");
+        input1.setAttribute("value", "True");
+        devForm.method = 'post';
+        devForm.action = 'signup/submit';
+        devForm.enctype = 'multipart/form-data';  
+        devForm.appendChild(id);
+        devForm.appendChild(pw);
+        devForm.appendChild(email);
+        devForm.appendChild(nickname);
+        devForm.appendChild(signupImg);
+        devForm.appendChild(input1);
+        document.body.appendChild(devForm);
+        devForm.submit();
+
+    }
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+</script>
+</html>
