@@ -173,55 +173,6 @@ td
 
 </html>
 
-<details><summary><h4>판매자와 구매자의 중간지점 찾기</h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-```
-        function getAddr(lat,lng){
-            let geocoder = new kakao.maps.services.Geocoder();
-
-            let coord = new kakao.maps.LatLng(lat, lng);
-            let callback = function(result, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                    addname2=result[0].address.address_name;
-                }
-            }
-            geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-        }
-  
-        var geocoder = new kakao.maps.services.Geocoder();
-        var callback = function(result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                console.log(result);
-                addx1=result[0].address.x;
-                addy1=result[0].address.y;
-                addx1=parseFloat(addx1);
-                addy1=parseFloat(addy1);
-                addx3=addx1+addx2;
-                addy3=addy1+addy2;
-                addx4 = addx3/2;
-                addy4 = addy3/2;
-                lat = addy4;
-                lng = addx4;
-        
-                options = { //지도를 생성할 때 필요한 기본 옵션
-                    center: new kakao.maps.LatLng(addy4, addx4), //지도의 중심좌표.
-                    level: 4 //지도의 레벨(확대, 축소 정도)
-                };
-                const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-                let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-                var marker = new kakao.maps.Marker({ 
-                    // 지도 중심좌표에 마커를 생성합니다 
-                    position: map.getCenter() 
-                }); 
-                // 지도에 마커를 표시합니다
-                marker.setMap(map);
-                getAddr(lat,lng);
-            }
-        };
-
-```
-</details>
 <details><summary><h4>1:1 대화 기능</h4> </summary>
 
 <!-- summary 아래 한칸 공백 두어야함 -->
