@@ -24,7 +24,8 @@
 <br>
 
 ## 🗝️ API 기능 명세서
-<details>
+<details><summary><h4>기능 명세 보기</h4> </summary>
+  
 ![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/bf7a62ab-56f9-4f7c-8d72-3f8a556c169a)
 
 </details>
