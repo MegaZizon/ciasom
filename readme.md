@@ -46,11 +46,11 @@
 
 https://github.com/MegaZizon/SangChuMarket/assets/105596059/28e7eacc-5619-4044-bfd3-290961360d19
 
-<details><summary><h4>로그인 팝업창</h4> </summary>
+<details><summary><h4>시청자로 입장하였을때</h4> </summary>
 
 <!-- summary 아래 한칸 공백 두어야함 -->
 
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/6a2e72cf-6387-4553-8546-491e2ebb469f)
+https://github.com/MegaZizon/SangChuMarket/assets/105596059/803408a6-985b-45f2-9cc4-9579fdef4663
 
 </details>
 
