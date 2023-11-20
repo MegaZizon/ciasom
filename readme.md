@@ -44,7 +44,7 @@
 #### 메인 페이지
 
 
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/7a484bd3-a125-4685-8ee9-ad183203a237)
+https://github.com/MegaZizon/SangChuMarket/assets/105596059/36560439-4b8d-4367-89c2-34915e80f7ff
 
 
 <details><summary><h4>로그인 팝업창</h4> </summary>
