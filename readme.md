@@ -30,6 +30,12 @@
 
 </details>
 
+## 🗝️ DB 스키마
+<details><summary><h4>DB 스키마 보기</h4> </summary>
+  
+![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/1a5abe3e-617b-47ef-ae2d-49b1d00c05a7)
+
+</details>
 
 ## 🚩 구현 결과
 
