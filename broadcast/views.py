@@ -350,55 +350,9 @@ class VideoTransformTrack(MediaStreamTrack):
         )
     async def recv(self):
         frame = await self.track.recv()
+        if self.model=="noModel":
 
-        if self.model!="noModel":
-            
-            
-            gbr1 = frame.to_ndarray(format="bgr24")
-
-            #wajah 얼굴
-            #kao 얼굴
-            wajah = HaarCascade.detectMultiScale(gbr1,1.1,4)
-
-            if len(wajah)>0:
-                x1, y1, width, height = wajah[0]
-            else:
-                x1, y1, width, height = 1, 1, 10, 10
-
-            x1, y1 = abs(x1), abs(y1)
-            x2, y2 = x1 + width, y1 + height
-
-
-            gbr = cv2.cvtColor(gbr1, cv2.COLOR_BGR2RGB)
-            gbr = Image.fromarray(gbr)                  # konversi dari OpenCV ke PIL
-            gbr_array = asarray(gbr)
-
-            face = gbr_array[y1:y2, x1:x2]
-
-            face = Image.fromarray(face)
-            face = face.resize((160,160))
-            face = asarray(face)
-
-
-            face = expand_dims(face, axis=0)
-            signature = self.MyFaceNet.embeddings(face)
-
-            min_dist=100
-            identity=' '
-            for key, value in self.database.items() :
-                dist = np.linalg.norm(value-signature)
-                if dist < min_dist:
-                    min_dist = dist
-                    identity = key
-
-            if identity != " ":
-                mosaic_face = cv2.resize(gbr1[y1:y2, x1:x2], (width // 10, height // 10))
-                mosaic_face = cv2.resize(mosaic_face, (width, height), interpolation=cv2.INTER_NEAREST)
-                gbr1[y1:y2, x1:x2] = mosaic_face
-
-
-            # cv2.putText(gbr1,identity, (100,100),cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
-            # cv2.rectangle(gbr1,(x1,y1),(x2,y2), (0,255,0), 2)
+            gbr3 = frame.to_ndarray(format="bgr24")
 
             current_time = time.time()
             if current_time - self.last_save_time >= self.save_interval:
@@ -409,17 +363,84 @@ class VideoTransformTrack(MediaStreamTrack):
                 if not os.path.exists(os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id)):
                     os.makedirs(os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id))
 
-                self.save_frame_locally(gbr1, save_path)
+                self.save_frame_locally(gbr3, save_path)
                 await save_frame_to_model(save_path,self.user_id,self.frame_count)
 
-            new_frame = VideoFrame.from_ndarray(gbr1, format="bgr24")
+            new_frame = VideoFrame.from_ndarray(gbr3, format="bgr24")
             new_frame.pts = frame.pts
             new_frame.time_base = frame.time_base
 
             return new_frame
-        
-        else:
+
             
+        # if self.model!="noModel":
+            
+            
+        #     gbr1 = frame.to_ndarray(format="bgr24")
+
+        #     #wajah 얼굴
+        #     #kao 얼굴
+        #     wajah = HaarCascade.detectMultiScale(gbr1,1.1,4)
+
+        #     if len(wajah)>0:
+        #         x1, y1, width, height = wajah[0]
+        #     else:
+        #         x1, y1, width, height = 1, 1, 10, 10
+
+        #     x1, y1 = abs(x1), abs(y1)
+        #     x2, y2 = x1 + width, y1 + height
+
+
+        #     gbr = cv2.cvtColor(gbr1, cv2.COLOR_BGR2RGB)
+        #     gbr = Image.fromarray(gbr)                  # konversi dari OpenCV ke PIL
+        #     gbr_array = asarray(gbr)
+
+        #     face = gbr_array[y1:y2, x1:x2]
+
+        #     face = Image.fromarray(face)
+        #     face = face.resize((160,160))
+        #     face = asarray(face)
+
+
+        #     face = expand_dims(face, axis=0)
+        #     signature = self.MyFaceNet.embeddings(face)
+
+        #     min_dist=100
+        #     identity=' '
+        #     for key, value in self.database.items() :
+        #         dist = np.linalg.norm(value-signature)
+        #         if dist < min_dist:
+        #             min_dist = dist
+        #             identity = key
+
+        #     if identity != " ":
+        #         mosaic_face = cv2.resize(gbr1[y1:y2, x1:x2], (width // 10, height // 10))
+        #         mosaic_face = cv2.resize(mosaic_face, (width, height), interpolation=cv2.INTER_NEAREST)
+        #         gbr1[y1:y2, x1:x2] = mosaic_face
+
+
+        #     # cv2.putText(gbr1,identity, (100,100),cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2, cv2.LINE_AA)
+        #     # cv2.rectangle(gbr1,(x1,y1),(x2,y2), (0,255,0), 2)
+
+        #     current_time = time.time()
+        #     if current_time - self.last_save_time >= self.save_interval:
+        #         self.last_save_time = current_time
+        #         self.frame_count += 1
+        #         filename = f"temp_{self.user_id}_{self.frame_count}.jpg"
+        #         save_path = os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id,filename)
+        #         if not os.path.exists(os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id)):
+        #             os.makedirs(os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id))
+
+        #         self.save_frame_locally(gbr1, save_path)
+        #         await save_frame_to_model(save_path,self.user_id,self.frame_count)
+
+        #     new_frame = VideoFrame.from_ndarray(gbr1, format="bgr24")
+        #     new_frame.pts = frame.pts
+        #     new_frame.time_base = frame.time_base
+
+        #     return new_frame
+        
+        elif self.model=="allMosaic":
             fonts = cv2.FONT_HERSHEY_PLAIN
             
             # print('first')
@@ -470,15 +491,7 @@ class VideoTransformTrack(MediaStreamTrack):
                     
             #         print('middle')
 
-                    utils.rect_corners(gbr2, face_react, utils.MAGENTA, th=3)
-                    utils.text_with_background(
-                        gbr2,
-                        f"score: {(face.score[0]*100):.2f}",
-                        face_react[:2],
-                        fonts,
-                        color=utils.MAGENTA,
-                        scaling=0.7,
-                    )
+                    
 
             # print('last')
 
@@ -500,13 +513,69 @@ class VideoTransformTrack(MediaStreamTrack):
 
 
             return new_frame
-                    
+        
+        else:
+            gbr1 = frame.to_ndarray(format="bgr24")
 
 
-            # return frame
+            wajah = HaarCascade.detectMultiScale(gbr1, 1.1, 4)
+
+            for (x1, y1, width, height) in wajah:
+                x1, y1 = abs(x1), abs(y1)
+                x2, y2 = x1 + width, y1 + height
+
+                gbr = cv2.cvtColor(gbr1, cv2.COLOR_BGR2RGB)
+                gbr = Image.fromarray(gbr)
+                gbr_array = asarray(gbr)
+
+                face = gbr_array[y1:y2, x1:x2]
+
+                face = Image.fromarray(face)
+                face = face.resize((160, 160))
+                face = asarray(face)
+
+                face = expand_dims(face, axis=0)
+                signature = self.MyFaceNet.embeddings(face)
+
+                min_dist = 100
+                identity = ' '
+                for key, value in self.database.items():
+                    dist = np.linalg.norm(value - signature)
+                    if dist < min_dist:
+                        min_dist = dist
+                        identity = key
+
+                unknownStr = f'user_data/user_{self.user_id}/1'
+                unknownStr2 = f'user_data/user_{self.user_id}/2'
+                if identity == unknownStr or identity == unknownStr2:  # 등록된 얼굴이 아닌 경우 모자이크 처리
+                    # 해당 얼굴 영역을 모자이크하기 위해 이미지를 가져와 모자이크 처리
+                    face_censored = gbr1[y1:y2, x1:x2]
+                    face_censored = cv2.GaussianBlur(face_censored, (99, 99), 30)  # 가우시안 블러를 사용한 모자이크 처리
+                    gbr1[y1:y2, x1:x2] = face_censored  # 모자이크 처리된 영역을 원본 이미지에 적용
+
+            current_time = time.time()
+            if current_time - self.last_save_time >= self.save_interval:
+                self.last_save_time = current_time
+                self.frame_count += 1
+                filename = f"temp_{self.user_id}_{self.frame_count}.jpg"
+                save_path = os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id,filename)
+                if not os.path.exists(os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id)):
+                    os.makedirs(os.path.join(settings.MEDIA_ROOT, "liveroom_img","user_"+self.user_id))
+
+                self.save_frame_locally(gbr1, save_path)
+                await save_frame_to_model(save_path,self.user_id,self.frame_count)
+
+
+
+            new_frame = VideoFrame.from_ndarray(gbr1, format="bgr24")
+            new_frame.pts = frame.pts
+            new_frame.time_base = frame.time_base
+
+            return new_frame
+
     def save_frame_locally(self, frame, save_path):
         cv2.imwrite(save_path,frame)
-        print(f"Frame saved locally to {save_path}")
+        # print(f"Frame saved locally to {save_path}")
         # user_instance = User.objects.get(user_id=user_id)
         # user_model=User_model(parent=user_instance,user_id=user_instance.user_id,model_name=received_data)
         # user_model.user_model.save(user_id+'.pkl',myfile2)
@@ -589,7 +658,8 @@ def out_live_object(host_id):
     try:
         print("Client 퇴장 Room HOST ID:",host_id)
         live = LiveRoom.objects.get(host_id = host_id)
-        live.head_count = live.head_count-1
+        if(live.head_count>0):
+            live.head_count = live.head_count-1
         live.save()
     except:
         pass

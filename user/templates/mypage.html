@@ -28,7 +28,7 @@
         type="image"
         id="home"
         src="{% static 'mediafiles/return.png' %}"
-        onclick="location.href='../streamer_main.html'"
+        onclick="preMove()"
         width="30px"
         height="30px"
       />
@@ -58,7 +58,7 @@
               </div>
               <div class="lower-container">
                 <div>
-                  <p>사용자 이름</p>
+                  <p>{{ user.user_nickname }} 님 환영합니다.</p>
                 </div>
                 <br />
                 <div>
@@ -148,7 +148,7 @@
   </div>
 
     <div id="downdelete">
-      <div class="back-button"><button class="modify-button" onclick="">이전으로</button></div>
+      <div class="back-button"><button class="modify-button" onclick="preMove()">이전으로</button></div>
       <div class="delete-user"><button class="modify-button" onclick="outsite()">회원탈퇴</button></div>
     </div>
 
@@ -187,7 +187,7 @@
       });
 
       function logout() {
-        location.href = '../../index.html';
+        location.href = '/logout';
       }
       document.addEventListener('DOMContentLoaded', function () {
         document
@@ -329,6 +329,24 @@
         }
         
       }
+
+      function outsite(){
+
+        if (confirm("회원탈퇴 하시겠습니까?")) {
+          var modForm = document.createElement('form');
+          var input1 = document.createElement('input');
+          input1.setAttribute("type", "hidden");
+          input1.setAttribute("name", "out");
+          input1.setAttribute("value", "True");
+          modForm.method = 'post';
+          modForm.action = '/mypage/changeInfo';  
+          modForm.appendChild(input1);
+          document.body.appendChild(modForm);
+          modForm.submit();
+        }
+
+      }
+
       function previewImage(event) {
         
         var preImg=document.getElementById('preImg');
@@ -351,6 +369,9 @@
         // 파일을 읽어들임
         imagePreview.style.width="100%";
         imagePreview.style.height="100%";
+      }
+      function preMove(){
+        window.history.back();
       }
 
     </script>

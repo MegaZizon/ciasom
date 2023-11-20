@@ -3,6 +3,8 @@ from .models import *
 from random import *
 from .sendmail import send
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.files import File
+from django.core.files.base import ContentFile
 
 def index(request):
     content={}
@@ -10,10 +12,13 @@ def index(request):
     if not request.session.get('user_id'):
         return render(request,'index.html',content)
     else:
-        user_id=request.session.get('user_id')
-        user=User.objects.get(user_id=user_id)
-        content = {"user":user}
-        return render(request,'choice.html',content)
+        try:
+            user_id=request.session.get('user_id')
+            user=User.objects.get(user_id=user_id)
+            content = {"user":user}
+            return render(request,'choice.html',content)
+        except:
+            return redirect('logout')
     
 def streamerSet(request):
 
@@ -281,20 +286,32 @@ def registImg(request):
             return JsonResponse({'message': '이미 사용중인 모델명입니다.'})
         uploaded_files = request.FILES.getlist('image[]')
         # 각 파일을 처리하거나 저장할 수 있습니다.
+        count=0
         for file in uploaded_files:
+            if(count==0):
+                unknownFile=(os.path.join(settings.MEDIA_ROOT,"user_data","unknown.jpg"))
+                with open(unknownFile, 'rb') as ufile:
+                    unknown = File(ufile)
+                    user_instance = User.objects.get(user_id=user_id)
+                    user = User_register(parent=user_instance,user_id=user_instance.user_id)
+                    print("unknownFile")
+                    user.user_img.save('unknown.jpg',unknown)
+                    user.save()
+                    count += 1
             # 여기서 파일을 원하는 대로 처리합니다.
             user_instance = User.objects.get(user_id=user_id)
             user = User_register(parent=user_instance,user_id=user_instance.user_id,user_img=file)
             
             user.save()
+
          
         deepStr=deeplearn(user_id,received_data)
         registImg=User_register.objects.filter(user_id=user_id)
         for regImg in registImg:
             regImg.delete()  
-        return JsonResponse({'message': 'Files uploaded successfully.'})
+        return JsonResponse({'message': '모델 학습이 완료되었습니다.'})
 
-    return JsonResponse({'message': 'Invalid request method.'}, status=400)
+    return JsonResponse({'message': '학습중 오류가 발생하였습니다.'}, status=400)
 
 # def registImg(request):
 #     if not request.session.get('user_id'):
@@ -332,7 +349,6 @@ from keras_facenet import FaceNet
 import numpy as np
 from io import BytesIO
 from base64 import b64decode
-from django.core.files import File
 from django.http import JsonResponse 
 MyFaceNet = FaceNet()
 HaarCascade = cv2.CascadeClassifier(cv2.samples.findFile(cv2.data.haarcascades + 'haarcascade_frontalface_alt2.xml'))

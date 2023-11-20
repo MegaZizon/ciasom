@@ -99,7 +99,7 @@
         <div class="left-pannel-item">
           사용모델
         </div>
-        <div class="left-pannel-item">
+        <div style="font-size:15px;" class="left-pannel-item">
           프레임 설정
         </div>
       </div>
@@ -120,13 +120,18 @@
             {% for md in model %}
                 <option value="{{ md.model_name }}">{{ md.model_name }}</option>
             {% endfor %}
+            <option value="allMosaic">전체 모자이크</option>
           </select>
         </div>
         <div class="right-pannel-item">
           <select id="frame">
+              <option value="1">1</option>
+              <option value="3">3</option>
               <option value="5" selected>5</option>
               <option value="10">10</option>
+              <option value="15">15</option>
               <option value="20">20</option>
+              <option value="25">25</option>
               <option value="30">30</option>
               <option value="60">60</option>
           </select>
@@ -178,7 +183,7 @@
   });
 
   function logout() {
-    location.href = '../../index.html';
+    location.href = '/logout';
   }
   document.addEventListener('DOMContentLoaded', function () {
     document
