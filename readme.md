@@ -29,69 +29,6 @@
 
 </details>
 
-<details><summary><h4>1:1 대화 기능</h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-
-1. <message.jsp에 관하여(메세지보내는 창)>메시지를 보낼 때 msg 테이블에 reciverID에 받는사람 senderID에 보낸사람을 입력하여 msg table에 into 하도록 하였습니다.
-   과거 대화내역 출력 부분은 select * from msg where (받는사람 = 나 and 보낸사람 = 상대) or (받는사람 = 상대 and 보낸사람 = 나) 인 경우를 리스트에 담아서 가져오게하였습니다.
-   가져온 뒤 reciverID가 나면 대화의 왼쪽, senderID가 나면 대화의 오른쪽에 표시되도록 하였습니다.
-
-
-2. <message_main.jsp에 관하여(메세지함 창)>메세지 함에서 개개인별 대화내역의 마지막 내용을 리스트를 가져온 방법은 자신의 닉네임이 받는사람 이거나 보낸사람이면(select * from msg where (senderId= 자신닉네임) or (reciverId= 자신닉네임)  리스트에 담아서 가지고왔습니다.
-   그 뒤 한 상대당 1개의 리스트(채팅방)만 보여지게 하기 위해 중복된 값을 제거하여(msgList3 메소드에서 반복문과 ArrayList<String>의 contain 메소드를 이용) 대화함에 출력하였습니다.
-
-
-3. 메세지 알림기능은 is Read가 0이고 받는사람이 자신이라면 알림이 표시되도록 하였고(msgToMe 메소드) 알림을 확인할경우 isRead를 1로 update 하도록 하였습니다(msgRead 메소드)
-
-
-<a href="https://github.com/MegaZizon/SangChuMarket/blob/main/src/main/webapp/message/message.jsp">message.jsp</a>
-
-
-<a href="https://github.com/MegaZizon/SangChuMarket/blob/main/src/main/webapp/message/message_main.jsp">message_main.jsp</a>
-
-
-<a href="https://github.com/MegaZizon/SangChuMarket/blob/main/src/main/java/msg/MsgDAO.java">MsgDAO.java</a>
-
-</details>
-
-</details>
-<details><summary><h4> 데이터베이스 구성</h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-
-TABLE USER
-
-
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/4eaa899e-808a-4f7c-b8ac-3c4ed7857624)
-
-TABLE Image
-
-
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/96e74297-a60f-4b3e-924f-3d2ec16e4984)
-
-TABLE Msg
-
-
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/a17cc4e8-6b2b-4764-9059-1ab6669f5d0a)
-
-
-</details>
-
-
-<details><summary><h4>MVC 모델 1</h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/955710bc-b54b-49da-8dc0-8ce25f9b12ac)
-
-
-상추마켓은 MVC모델 1 구조를 사용하였습니다. View 와 Controller 모두 JSP가 담당하며 Model은 JavaBeans에서 담당합니다. 
-구조가 단순하여 익히고 적용하기가 쉽기 때문에 이 구조를 사용하였습니다.
-하지만 사용하면서 출력을 위한 뷰 코드와 로직처리를 위한 자바 코드 등이 뒤섞여 나중에는 유지보수가 매우 어려워지는 것을 느꼈습니다. 
-</details>
-
-</details>
 
 ## 🚩 구현 결과
 
