@@ -23,8 +23,8 @@
 #### 썸네일 표시 기능
 <br>
 
-<details>## 🗝️ API 기능 명세서
-
+## 🗝️ API 기능 명세서
+<details>
 ![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/bf7a62ab-56f9-4f7c-8d72-3f8a556c169a)
 
 </details>
