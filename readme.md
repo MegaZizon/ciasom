@@ -25,47 +25,7 @@
 
 ## 🗝️ API 기능 명세서
 
-<html xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-xmlns="http://www.w3.org/TR/REC-html40">
-
-<head>
-
-<meta name=ProgId content=PowerPoint.Slide>
-<meta name=Generator content="Microsoft PowerPoint 15">
-
-</head>
-
-<body>
-<!--StartFragment-->
-
-
-화면 | URL | 메소드 | 세부기능 | 설명
--- | -- | -- | -- | --
-메인 페이지 | / | GET | - | 메인페이지 뷰
-/login | POST | 로그인 | 아이디/비밀번호   일치 확인 후 로그인,   틀릴경우 알림
-/signup | POST | 회원가입 | 아이디/이메일/닉네임 중복확인 기능 구현
-마이 페이지 | /mypage | GET | 마이페이지 | 마이페이지 뷰
-/mypage/changeInfo | POST | 마이페이지 정보 수정 | POST 값에   따라 회원정보(닉네임/이메일/비밀번호) 수정
-모델 등록 페이지 | /faceupload | GET | 모델 등록 페이지 | 모델 등록 페이지 뷰
-/faceupload/deeplearn | POST | 모델 등록 | 입력받은 사진을 토대로 모델 학습하여 pkl 파일 생성 기능
-모델 등록 리스트 페이지 | /facelist | GET | - | 등록된 모델 리스트 페이지 뷰
-/facelist/model/{model_id} | POST | 모델 삭제 | 모델 삭제 기능
-스트리머 메뉴 페이지 | /streamerset | GET | - | 스트리머 메뉴 페이지 뷰
-방송 세팅 페이지 | /onair/set | GET | - | 방송 세팅 페이지 뷰
-/onair/start | POST | 방송 시작 | WebRTC 로   서버와 PeerConnection 및    오디오/비디오   스트리밍 전송 기능   10초마다 썸네일을 생성하여 방송 리스트에 보여지도록 하는 로직 구현
-/onair/end | POST | 방송 종료 | 방송 종료 기능
-방송 리스트 페이지 | /list | GET | - | 방송 리스트 페이지 뷰
-방송 시청 페이지 | /broadcast | GET | 방송 시청 | 방송 시청 페이지 뷰
-/broadcast/{host_id} | POST | 방송 시청 시작 | 서버와 PeerConnection 한 뒤 host_id의   비디오/오디오 스트림을 WebRTC로 수신 기능   시청자가 입장하면 시청자 수가 증가하도록 하는 로직 구현
-스트리머 검색 페이지 | /search/host/{host_id} | POST | 스트리머 닉네임 검색 | 입력받은 문자열을 포함하는 스트리머 닉네임 검색 기능
-방송제목 검색 페이지 | /search/title/{title} | POST | 방송 제목 검색 | 입력받은 문자열을 포함하는 방송 제목 검색 기능
-
-
-
-<!--EndFragment-->
-</body>
-
-</html>
+![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/bf7a62ab-56f9-4f7c-8d72-3f8a556c169a)
 
 <details><summary><h4>1:1 대화 기능</h4> </summary>
 
