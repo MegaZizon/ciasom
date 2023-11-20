@@ -41,11 +41,10 @@
 
 
 
-#### 메인 페이지
+#### 메인 기능 ( 지정된 사용자 이외 모자이크 기능 )
 
 
-https://github.com/MegaZizon/SangChuMarket/assets/105596059/36560439-4b8d-4367-89c2-34915e80f7ff
-
+https://github.com/MegaZizon/SangChuMarket/assets/105596059/28e7eacc-5619-4044-bfd3-290961360d19
 
 <details><summary><h4>로그인 팝업창</h4> </summary>
 
