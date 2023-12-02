@@ -15,6 +15,8 @@
 - **Library** :  WebRTC, AioRTC
 - **Database** : SQLite3
 
+
+
 ## 📌 주요 기능
 #### 라이브 스트리밍 기능
 #### 라이브 스트리밍 시청 기능
@@ -23,10 +25,15 @@
 #### 썸네일 표시 기능
 <br>
 
+## 🗝️ System Architecture
+
+![image](https://github.com/MegaZizon/ciasom/assets/105596059/ea653e60-bbcb-449e-94d7-4ee3e7d80f81)
+
+
 ## 🗝️ API 기능 명세서
 <details><summary><h4>기능 명세 보기</h4> </summary>
   
-![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/bf7a62ab-56f9-4f7c-8d72-3f8a556c169a)
+![image](https://github.com/MegaZizon/ciasom/assets/105596059/ea653e60-bbcb-449e-94d7-4ee3e7d80f81)
 
 </details>
 
