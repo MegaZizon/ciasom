@@ -27,8 +27,7 @@
 
 ## 🗝️ System Architecture
 
-![image](https://github.com/MegaZizon/ciasom/assets/105596059/ea653e60-bbcb-449e-94d7-4ee3e7d80f81)
-
+![image](https://github.com/MegaZizon/ciasom/assets/105596059/0aed6443-ecae-414f-ae54-88ca66bc8280)
 
 ## 🗝️ API 기능 명세서
 <details><summary><h4>기능 명세 보기</h4> </summary>
