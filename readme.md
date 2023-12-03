@@ -29,7 +29,11 @@
 
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/0aed6443-ecae-414f-ae54-88ca66bc8280)
 
+---
+
 <details><summary> 설명 보기 </summary>
+  
+---
   
 <br>
 <br>
