@@ -1,11 +1,11 @@
-# Ciasom
+# 📺 Ciasom
 실시간 등록된 사용자 외 모자이크 웹 플랫폼 
 
 ## 🖥️ 프로젝트 소개
 사용자에게 사진을 입력받아 입력받은 사진 외의 사용자가 영상에 출연할 경우 모자이크 처리를 진행함
 <br>
 
-##  팀 소개
+##  👨‍👨‍👧‍👧 팀 소개
 지준오(백엔드(웹)), 전찬수(AI), 최호성(백엔드(앱)), 백지원(프론트엔드)
 <br>
 
@@ -17,7 +17,7 @@
 - **Environment** : Docker, Nginx
 
 
-## 📌 주요 기능
+## ❗ 주요 기능
 #### 라이브 스트리밍 기능
 #### 라이브 스트리밍 시청 기능
 #### 실시간 모자이크 기능
@@ -25,13 +25,13 @@
 #### 썸네일 표시 기능
 <br>
 
-## 🗝️ System Architectur
+## 🧬 System Architecture
 
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/0aed6443-ecae-414f-ae54-88ca66bc8280)
 
 ---
 
-<details><summary><h4> 설명 보기 </h4></summary>
+<details><summary><h4> 자세히 </h4></summary>
   
 ---
   
@@ -62,7 +62,7 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
   
 ---
   
-## 호스트의 연결 과정
+## 🙍‍♂️호스트의 연결 과정
 
 1. 호스트가 방송시작을 누르면 Google Stun Server와 연결하여 자신의 공인 IP 주소 및 포트를 알아내고, 그 정보(SDP)와 자신이 이용할 딥러닝 모델정보 등을 서버에 전송한다.
 2. 서버에서 AioRTC가 동작하여 호스트와 연결한다. (RTCPeerConnection)
@@ -71,7 +71,7 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 3. 연결이 정상적으로 완료되면, 클라이언트는 영상을 전송한다.
 4. 서버에서 이벤트가 발생하여 영상이 변환되고 배열에 반영된다. 이는 호스트나 시청자에게 전송된다.
 
-## 시청자의 연결 과정
+## 👨‍👨‍👦‍👦시청자의 연결 과정
 
 1. 시청자가 방송시작을 누르면 Google Stun Server와 연결하여 자신의 공인 IP 주소 및 포트를 알아내고, 그 정보(SDP)와 자신이 시청할 호스트이름을 서버에 전송한다.
 2. 서버에서 AioRTC가 동작하여 시청자와 연결한다. (RTCPeerConnection)
@@ -86,14 +86,14 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 
 ---
 
-## 🗝️ API 기능 명세서
+## 🔗 API 기능 명세서
   
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/7f224037-0a0f-408e-b3bc-7ba930d82657)
 
 
 ---
 
-## 🗝️ DB 스키마
+## 🗂️ DB 스키마
   
 ![image](https://github.com/MegaZizon/SangChuMarket/assets/105596059/1a5abe3e-617b-47ef-ae2d-49b1d00c05a7)
 
