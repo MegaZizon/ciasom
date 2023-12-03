@@ -31,7 +31,7 @@
 
 ---
 
-<details><summary> 설명 보기 </summary>
+<details><summary><h4> 설명 보기 </h4></summary>
   
 ---
   
@@ -48,7 +48,6 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 따라서 Gunicorn을 사용하여 Uvicorn이 Gunicorn의 워커(프로세스)로서 동작하게 하였다.
 
 ---
-
 <details><summary><h4>CMD에서 워커프로세스 실행 과정 </h4> </summary>
   
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/7bb0fa02-243a-4a24-b043-de5b48264217)
