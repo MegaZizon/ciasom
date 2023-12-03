@@ -39,12 +39,14 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 
 따라서 Gunicorn을 사용하여 Uvicorn이 Gunicorn의 워커(프로세스)로서 동작하게 하였다.
 
-<details><summary><h4>CMD에서 워커프로세스 실행 과정 보기</h4> </summary>
+<details><summary><h4>CMD에서 워커프로세스 실행 과정 </h4> </summary>
   
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/7bb0fa02-243a-4a24-b043-de5b48264217)
 
 </details>
 
+<details><summary><h4>호스트와 시청자의 연결과정 및 미디어 스트림의 송수신 방식</h4> </summary>
+  
 호스트의 연결 과정
 
 1. 호스트가 방송시작을 누르면 Google Stun Server와 연결하여 자신의 공인 IP 주소 및 포트를 알아내고, 그 정보(SDP)와 자신이 이용할 딥러닝 모델정보 등을 서버에 전송한다.
@@ -60,6 +62,8 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 2. 서버에서 AioRTC가 동작하여 시청자와 연결한다. (RTCPeerConnection)
 3. 서버에서는 호스트가 방송을 하고있는지 확인하고 방송을 하고있다면 배열에서 호스트이름에 해당하는 영상 스트림 객체를 시청자에게 송신할 준비를 한다.
 4. 연결이 정상적으로 완료되면, 서버는 영상을 송신하고 시청자는 영상을 수신받는다.
+
+</details>
 
 ## 🗝️ API 기능 명세서
 <details><summary><h4>기능 명세 보기</h4> </summary>
