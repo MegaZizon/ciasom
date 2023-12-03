@@ -52,8 +52,6 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
   
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/7bb0fa02-243a-4a24-b043-de5b48264217)
 
----
-
 </details>
 
 ---
@@ -78,13 +76,13 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 
 #### 미디어 트래픽을 중계하는 중앙 서버 방식인 SFU 방식을 응용하여 서버를 구현하였다.
 
----
-
 </details>
 
 ---
 
 </details>
+
+---
 
 ## 🗝️ API 기능 명세서
   
