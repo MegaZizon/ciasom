@@ -36,7 +36,6 @@
 ---
   
 <br>
-<br>
   
 EC2에서 무료로 제공하는 인스턴스(t2.micro)로는 작동하지 않아 로컬에서 배포하였다.
 
@@ -48,11 +47,15 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 
 따라서 Gunicorn을 사용하여 Uvicorn이 Gunicorn의 워커(프로세스)로서 동작하게 하였다.
 
+---
+
 <details><summary><h4>CMD에서 워커프로세스 실행 과정 </h4> </summary>
   
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/7bb0fa02-243a-4a24-b043-de5b48264217)
 
 </details>
+
+<br>
 
 <details><summary><h4>호스트와 시청자의 연결과정 및 미디어 스트림의 송수신 방식</h4> </summary>
   
