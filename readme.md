@@ -88,7 +88,8 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 
 ## 🗝️ API 기능 명세서
   
-![image](https://github.com/MegaZizon/ciasom/assets/105596059/ea653e60-bbcb-449e-94d7-4ee3e7d80f81)
+![image](https://github.com/MegaZizon/ciasom/assets/105596059/7f224037-0a0f-408e-b3bc-7ba930d82657)
+
 
 ---
 
