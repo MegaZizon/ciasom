@@ -25,10 +25,12 @@
 #### 썸네일 표시 기능
 <br>
 
-<details><summary> 🗝️ System Architecture </summary>
+## 🗝️ System Architectur
 
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/0aed6443-ecae-414f-ae54-88ca66bc8280)
 
+<details><summary> 설명 보기 </summary>
+  
 EC2에서 무료로 제공하는 인스턴스(t2.micro)로는 작동하지 않아 로컬에서 배포하였다.
 
 WSGI는 요청을 받고 응답을 반환하는 동작이 단일 동기 호출 방식이기 때문에 길게 연결되어야 하는 WebRTC 같은 비동기 통신을 이용하려면 ASGI를 사용하여야 한다.
