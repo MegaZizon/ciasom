@@ -25,7 +25,7 @@
 #### 썸네일 표시 기능
 <br>
 
-<details><summary> ## 🗝️ System Architecture </summary>
+<details><summary> 🗝️ System Architecture </summary>
 
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/0aed6443-ecae-414f-ae54-88ca66bc8280)
 
