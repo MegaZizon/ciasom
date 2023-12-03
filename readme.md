@@ -31,7 +31,7 @@
 
 ---
 
-<details><summary><h4> 자세히 </h4></summary>
+<details><summary><h4> 🧾 자세히 </h4></summary>
   
 ---
 
