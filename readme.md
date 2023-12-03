@@ -12,9 +12,9 @@
 ### ⚙️ 개발 환경
 - `Python 3.11`
 - `Django`
-- **Library** :  WebRTC, AioRTC
-- **Database** : SQLite3
-
+- **Library** :  WebRTC, AioRTC, OpenCV, gunicorn, uvicorn
+- **Database** : PostgreSQL
+- **Environment** : Docker, Nginx
 
 
 ## 📌 주요 기능
@@ -63,7 +63,7 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 3. 서버에서는 호스트가 방송을 하고있는지 확인하고 방송을 하고있다면 배열에서 호스트이름에 해당하는 영상 스트림 객체를 시청자에게 송신할 준비를 한다.
 4. 연결이 정상적으로 완료되면, 서버는 영상을 송신하고 시청자는 영상을 수신받는다.
 
-미디어 트래픽을 중계하는 중앙 서버 방식인 SFU 방식을 응용하여 서버를 구현하였다.
+#### 미디어 트래픽을 중계하는 중앙 서버 방식인 SFU 방식을 응용하여 서버를 구현하였다.
 
 </details>
 
