@@ -25,7 +25,7 @@
 #### 썸네일 표시 기능
 <br>
 
-## 🗝️ System Architecture
+<details><summary> ## 🗝️ System Architecture </summary>
 
 ![image](https://github.com/MegaZizon/ciasom/assets/105596059/0aed6443-ecae-414f-ae54-88ca66bc8280)
 
@@ -64,6 +64,8 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 4. 연결이 정상적으로 완료되면, 서버는 영상을 송신하고 시청자는 영상을 수신받는다.
 
 #### 미디어 트래픽을 중계하는 중앙 서버 방식인 SFU 방식을 응용하여 서버를 구현하였다.
+
+</details>
 
 </details>
 
