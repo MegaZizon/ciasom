@@ -104,42 +104,5 @@ Uvicorn은 단일 프로세스로 비동기 처리가 가능하지만, 결국 �
 
 ---
 
-## 🚩 구현 결과
 
-
-
-#### 메인 기능 ( 지정된 사용자 이외 모자이크 기능 )
-
-
-https://github.com/MegaZizon/SangChuMarket/assets/105596059/28e7eacc-5619-4044-bfd3-290961360d19
-
-<details><summary><h4>시청자로 입장하였을때</h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-
-https://github.com/MegaZizon/SangChuMarket/assets/105596059/803408a6-985b-45f2-9cc4-9579fdef4663
-
-</details>
-
-<details><summary><h4> 전체 모자이크 </h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-
-https://github.com/MegaZizon/SangChuMarket/assets/105596059/f25346e6-74c5-4aea-a8b6-67b0046b58f3
-
-</details>
-
-<details><summary><h4> 회원가입 및 마이페이지 </h4> </summary>
-
-<!-- summary 아래 한칸 공백 두어야함 -->
-
-https://github.com/MegaZizon/SangChuMarket/assets/105596059/5bce587f-df0e-44ef-b4ff-53714661acee
-
-
-</details>
-
-
-
-
-</details>
 
